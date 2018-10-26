@@ -1,0 +1,44 @@
+<html>
+ <head>
+  <title>CANVAS签名</title>
+  <meta charset="utf-8" />
+<style>
+html,body {width: 100%;height: 100%;margin: 0;}
+canvas{margin: 0;position: fixed;top: 0;
+left: 0;}
+</style>
+<script>
+function onload() {
+	var canvas=document.getElementById("canvas");
+	canvas.width = document.body.offsetWidth - 2
+	canvas.style.margin = 0
+	canvas.height = document.body.offsetHeight - 2
+	var ctx=canvas.getContext("2d");
+	canvas.addEventListener('touchstart', ontouchstart, false);
+	canvas.addEventListener('touchmove', ontouchmove, false);
+	canvas.addEventListener('touchend', ontouchend, false);
+	function ontouchstart(event){
+		var x=event.touches[0].clientX;
+		var y=event.touches[0].clientY;
+		ctx.beginPath();
+		ctx.moveTo(x,y);
+		console.log(x, y)
+	};
+	function ontouchmove (event) {
+		var x=event.touches[0].clientX;
+		var y=event.touches[0].clientY;
+		ctx.lineTo(x,y);
+		ctx.strokeStyle="red";
+		ctx.stroke();
+	}
+	function ontouchend(){
+	  ctx.closePath();
+	};
+}
+  
+</script>
+ </head>
+<body onload="onload()">
+<canvas id="canvas" style="border:1px solid red;"></canvas>
+</body>
+</html>
